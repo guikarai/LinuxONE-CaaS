@@ -56,13 +56,12 @@ And now launch Node-RED itself. No sudo is necessary, as port 1880 is high enoug
 node-red
 ```
 
-Some "Welcome to Node-RED" messages will print to the terminal. On your computer, point a web browser to port 1880 of the server. In our example, that's http://node-red.example.com:1880. The main admin interface of Node-RED will load.
+Some "Welcome to Node-RED" messages will print to the terminal. On your computer, point a web browser to port 1880 of the server. In our example, that's http://yourIP-address:1880. The main admin interface of Node-RED will load.
 
 We've installed Node-RED successfully and tested it out, so next, we'll add additional crypto libraries to Node-RED.
 
 # Step 3 — Installing node-red-contrib-crypto-js
-Node-RED nodes using CryptoJS to encrypt and decrypt messages.
-```
-npm install node-red-contrib-crypto-js
-```
+
+Connect to your node-red service on port 1880.
+eg. http://yourIP-address:1880
 
