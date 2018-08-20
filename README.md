@@ -2,6 +2,9 @@
 LinuxONE Crypto as a service with NodeJS and Node-Red
 
 # Architecture
+
+![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-linuxone-architecture.png)
+
 In this code pattern:
 1. You will install Node.js and Node-RED
 2. You will get install additional library for Encryption. 
