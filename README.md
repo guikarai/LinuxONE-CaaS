@@ -68,3 +68,21 @@ We've installed Node-RED successfully and tested it out, so next, we'll add addi
 Connect to your node-red service on port 1880.
 eg. http://yourIP-address:1880
 
+The landing page of an up and running Node-RED looks like the following:
+
+![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-landing-page.png)
+
+**Action:** Please, on the top-right-bar, click on **Menu**, and then **Manage palette**.
+
+![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-right-menu-bar.png)
+
+**Action:** Click on **Install** tab, enter as shwo below in the search bar: node-red-instal-crypto-js. Install the two listed packages.
+![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-instal-crypto-js.png)
+
+
+
+# Step 4 - Creating your local first encryption flow
+
+
+
+# Step 5 - Creation your first remote encryption flow
