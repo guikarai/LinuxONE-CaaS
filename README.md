@@ -156,21 +156,26 @@ You will be asked to enter your password twice. Enter the password you wish to u
 
 Now that Mosquitto is installed we can perform a local test to see if it is working.
 
-**Action:** Open three terminal windows. In one, make sure the Mosquitto broker is running. Please issue the following command:
+**Action:** Open four terminal windows. In one, make sure the Mosquitto broker is running. Please issue the following command:
 ```
 mosquitto
 ```
 
 **Action:** In the next terminal, run the command line subscriber. Please issue the following command:
 ```
-mosquitto_sub -v -t 'topic/test'
+mosquitto_sub -v -t 'topic/clear-text-data'
+```
+
+**Action:** In the next terminal, run the command line subscriber. Please issue the following command:
+```
+mosquitto_sub -v -t 'topic/encrypted-text-data'
 ```
 
 You should see the first terminal window echo that a new client is connected.
 
 **Action:** In the next terminal, please run the command line publisher:
 ```
-mosquitto_pub -t 'topic/test' -m 'hello World'
+mosquitto_pub -t 'topic/clear-text-data' -m 'hello World'
 ```
 You should see another message in the first terminal window saying another client is connected. You should also see this message in the subscriber terminal:
 ```
@@ -180,3 +185,35 @@ topic/test hello World
 We have shown that Mosquitto is configured correctly and we can both publish and subscribe to a topic.
 
 ## Step 6 - Creation your first remote encryption flow
+
+### MQTT and Node-RED
+Now we know the broker is working we can look at sending messages to and from Node-RED. 
+
+**Action:** Open new browser tab and go to the Node-RED flow editor that is running on your LinuxONE guest (this should be :1880). 
+
+**Action:**  Let's complete the previous and existing flow in the flow workspace. Find the **MQTT input node** in the input section of the toolbar to the left of the screen and drag an instance of the node into the workspace. Note that there are two MQTT nodes that come with Node-RED by default: input and output.
+
+**Action:** Double-click the MQTT input node to edit the configuration.
+
+**Action:** For this first test we will input the broker details: localhost and port 1883. 
+**Action:** Also make sure to change the Topic to the same as we used before: **topic/clear-text-data**. 
+**Action:** Ensure that you also input the user name and password that we configured earlier. 
+**Action:** Click OK to save.
+
+**Action:** Drag in a debug node and connect the two nodes. 
+**Action:** Click the Deploy button. If all is working correctly you should see a small green connected indicator underneath the MQTT node. Go to the terminal window in which the Mosquitto broker is running. There will be indication of a new client connection.
+
+Go to the terminal window where you originally ran the mosquitto_pub command and run it again. Now check the debug output panel in the Node-RED GUI and you should be able to see the hello World message.
+
+Next we will test to see if we can publish messages from Node-RED to the MQTT broker. Drag in an **MQTT output node** from the output section of the toolbar to the left of the screen. Double-click the node and enter the same parameters as before.
+
+**Action:** Double-click the MQTT input node to edit the configuration.
+
+**Action:** For this first test we will input the broker details: localhost and port 1883. 
+**Action:** Also make sure to change the Topic to the same as we used before: **topic/encrypted-text-data**. 
+**Action:** Ensure that you also input the user name and password that we configured earlier. 
+**Action:** Click OK to save.
+
+Save the node and drag in an Inject node. Connect the two nodes and deploy. If all the settings are correct you should see a green Connected indicator appear underneath the MQTT output node. Click the button on the left of the Inject node.
+
+Go back to the terminal window where you originally ran the mosquitto_sub command. It should show the message sent from the Inject node to the MQTT output node in Node-RED.
