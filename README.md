@@ -5,6 +5,7 @@ When you will complete this hands-on exploration of Crypto as a Service on Linux
 * Enabling OpenSSL to use the Hardware
 * Installing NodeJS and Node-Red
 * Creating local encryption capabilities
+* Installing Mosquitto
 * Creating remote encryption capabilities
 
 # Architecture
@@ -12,7 +13,7 @@ This journey requires an existing Linux on IBM Z or LinuxONE environment of your
 ![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-linuxone-architecture.png)
 
 In this code pattern:
-1. User installs Node.js and Node-RED and additional library for NodeJS encryption. 
+1. User installs Node.js, Node-RED, Mosquitto and additional library for NodeJS encryption. 
 2. User creates and encryption framework with Node-RED.
 3. User benefits Crypto as a Service on LinuxONE.
 
@@ -21,6 +22,7 @@ In this code pattern:
 * [OpenSSL](https://www.openssl.org/)
 * [NodeJS](https://nodejs.org/en/)
 * [Node-Red](https://nodered.org/)
+* [Mosquitto](https://mosquitto.org/)
 * [node-red-contrib-crypto-js](https://flows.nodered.org/node/node-red-contrib-crypto-js)
 
 # Featured technologies
@@ -96,10 +98,76 @@ The landing page of an up and running Node-RED looks like the following:
 **Action:** Click on **Install** tab, enter as shwo below in the search bar: node-red-instal-crypto-js. Install the two listed packages.
 ![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-instal-crypto-js.png)
 
-
-
 ## Step 4 - Creating your local first encryption flow
 
+## Step 5 - Installing and configuring Mosquitto
 
+### Installing Mosquitto
+```
+sudo apt-get install mosquitto mosquitto-clients
+```
 
-## Step 5 - Creation your first remote encryption flow
+Note that, once downloaded the Mosquitto broker starts straight away so we will stop it to make some changes first. 
+**Action:** Please issue the following command:
+
+```
+sudo /etc/init.d/mosquitto stop
+```
+### Configuring Mosquitto
+
+Now that the MQTT broker is installed we will add some basic security.
+**Action:** Create a config file with the following command:
+```
+cd /etc/mosquitto/conf.d/
+sudo vi mosquitto.conf
+```
+
+Let's stop anonymous clients connecting to our broker by adding a few lines to your config file. To control client access to the broker we also need to define valid client names and passwords. 
+**Action:** Please, add the lines:
+```
+allow_anonymous false
+password_file /etc/mosquitto/conf.d/passwd
+require_certificate false
+```
+
+**Action:** Save and exit your editor (vi in this case).
+
+**Action:** From the current /conf.d directory, create an empty password file:
+```
+sudo touch passwd
+```
+
+We will to use the mosquitto_passwd tool to create a password hash for user root:
+```
+sudo mosquitto_passwd -c /etc/mosquitto/conf.d/passwd root
+```
+
+You will be asked to enter your password twice. Enter the password you wish to use for the user you defined.
+### Testing Mosquitto
+
+Now that Mosquitto is installed we can perform a local test to see if it is working.
+
+**Action:** Open three terminal windows. In one, make sure the Mosquitto broker is running. Please issue the following command:
+```
+mosquitto
+```
+
+**Action:** In the next terminal, run the command line subscriber. Please issue the following command:
+```
+mosquitto_sub -v -t 'topic/test'
+```
+
+You should see the first terminal window echo that a new client is connected.
+
+**Action:** In the next terminal, please run the command line publisher:
+```
+mosquitto_pub -t 'topic/test' -m 'hello World'
+```
+You should see another message in the first terminal window saying another client is connected. You should also see this message in the subscriber terminal:
+```
+topic/test hello World
+```
+
+We have shown that Mosquitto is configured correctly and we can both publish and subscribe to a topic.
+
+## Step 6 - Creation your first remote encryption flow
