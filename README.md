@@ -1,17 +1,34 @@
 # LinuxONE-CaaS
-LinuxONE Crypto as a service with NodeJS and Node-Red
+
+When you will complete this hands-on exploration of Crypto as a Service on LinuxONE, you will understand how to:
+* Preparing your Linux Environment to use hardware crypto
+* Enabling OpenSSL to use the Hardware
+* Installing NodeJS and Node-Red
+* Creating local encryption capabilities
+* Creating remote encryption capabilities
 
 # Architecture
-
+This journey requires an existing Linux on IBM Z or LinuxONE environment of your choice as a starting point. From there, and after some optimization, you will be able to set-up a new Crypto as a Service to offer to processor architecture not as performing as LinuxONE or IBM Z.
 ![alt-text](https://github.com/guikarai/LinuxONE-CaaS/blob/master/images/node-red-linuxone-architecture.png)
 
 In this code pattern:
-1. You will install Node.js and Node-RED
-2. You will get install additional library for Encryption. 
-3. You will create and encryption framework with Node-RED.
-4. User to be able to benefit Crypto as a Service on LinuxONE.
+1. User installs Node.js and Node-RED and additional library for NodeJS encryption. 
+2. User creates and encryption framework with Node-RED.
+3. User benefits Crypto as a Service on LinuxONE.
 
-# Step 1 — Installing Node.js and npm
+# Included components
+* [LinuxONE Crypto](https://www.ibm.com/it-infrastructure/linuxone/capabilities/secure-cloud)
+* [OpenSSL](https://www.openssl.org/)
+* [NodeJS](https://nodejs.org/en/)
+* [Node-Red](https://nodered.org/)
+* [node-red-contrib-crypto-js](https://flows.nodered.org/node/node-red-contrib-crypto-js)
+
+# Featured technologies
+* [IBM LinuxONE](https://www.ibm.com/it-infrastructure/linuxone)
+
+# Steps
+
+## Step 1 — Installing Node.js and npm
 
 Node-RED is a switchboard a visual tool that helps you connect your favorite apps, websites, and hardware together to do new and useful things. Node-RED has a much more powerful and flexible interface, and a large open source community creating nodes to interact with a wide variety of apps and services.
 
@@ -37,7 +54,7 @@ npm -v
 
 If it prints a version number without error, we can continue on to our next step, where we'll use npm to install Node-RED itself.
 
-# Step 2 — Installing Node-RED
+## Step 2 — Installing Node-RED
 
 Use npm to install node-red and a helper utility called node-red-admin.
 ```
@@ -63,7 +80,7 @@ Some "Welcome to Node-RED" messages will print to the terminal. On your computer
 
 We've installed Node-RED successfully and tested it out, so next, we'll add additional crypto libraries to Node-RED.
 
-# Step 3 — Installing node-red-contrib-crypto-js
+## Step 3 — Installing node-red-contrib-crypto-js
 
 Connect to your node-red service on port 1880.
 eg. http://yourIP-address:1880
@@ -81,8 +98,8 @@ The landing page of an up and running Node-RED looks like the following:
 
 
 
-# Step 4 - Creating your local first encryption flow
+## Step 4 - Creating your local first encryption flow
 
 
 
-# Step 5 - Creation your first remote encryption flow
+## Step 5 - Creation your first remote encryption flow
